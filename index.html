@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Expense Tracker</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="header">
+
+        <div>
+            <p class="welcome">PERSONAL FINANCE</p>
+            <h1>Expense Tracker</h1>
+        </div>
+
+        <div class="header-icon">
+            💰
+        </div>
+
+    </header>
+
+
+    <!-- ================= SUMMARY CARDS ================= -->
+
+    <section class="summary">
+
+        <div class="summary-card balance-card">
+
+            <div class="card-icon">
+                💳
+            </div>
+
+            <div>
+                <p>Current Balance</p>
+                <h2 id="balance">
+                    ₹0.00
+                </h2>
+            </div>
+
+        </div>
+
+
+        <div class="summary-card income-card">
+
+            <div class="card-icon">
+                ↑
+            </div>
+
+            <div>
+                <p>Total Income</p>
+                <h2 id="income">
+                    ₹0.00
+                </h2>
+            </div>
+
+        </div>
+
+
+        <div class="summary-card expense-card">
+
+            <div class="card-icon">
+                ↓
+            </div>
+
+            <div>
+                <p>Total Expenses</p>
+                <h2 id="expenses">
+                    ₹0.00
+                </h2>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= MAIN GRID ================= -->
+
+    <main class="main-grid">
+
+
+        <!-- ================= ADD TRANSACTION ================= -->
+
+        <section class="form-card">
+
+            <div class="section-title">
+
+                <div>
+                    <span>TRANSACTION</span>
+                    <h2 id="formTitle">
+                        Add Transaction
+                    </h2>
+                </div>
+
+            </div>
+
+
+            <form id="transactionForm">
+
+                <div class="form-group">
+
+                    <label>
+                        Transaction Type
+                    </label>
+
+                    <div class="type-buttons">
+
+                        <button
+                            type="button"
+                            class="type-btn active"
+                            data-type="expense">
+
+                            ↓ Expense
+
+                        </button>
+
+                        <button
+                            type="button"
+                            class="type-btn"
+                            data-type="income">
+
+                            ↑ Income
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="description">
+                        Description
+                    </label>
+
+                    <input
+                        type="text"
+                        id="description"
+                        placeholder="e.g. Grocery shopping"
+                        required>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="amount">
+                            Amount
+                        </label>
+
+                        <div class="amount-input">
+
+                            <span>₹</span>
+
+                            <input
+                                type="number"
+                                id="amount"
+                                placeholder="0.00"
+                                min="0"
+                                step="0.01"
+                                required>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="date">
+                            Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="date"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="category">
+                        Category
+                    </label>
+
+                    <select id="category" required>
+
+                        <option value="Food">
+                            🍔 Food
+                        </option>
+
+                        <option value="Shopping">
+                            🛍️ Shopping
+                        </option>
+
+                        <option value="Transport">
+                            🚗 Transport
+                        </option>
+
+                        <option value="Bills">
+                            🧾 Bills
+                        </option>
+
+                        <option value="Entertainment">
+                            🎬 Entertainment
+                        </option>
+
+                        <option value="Health">
+                            ❤️ Health
+                        </option>
+
+                        <option value="Education">
+                            📚 Education
+                        </option>
+
+                        <option value="Salary">
+                            💼 Salary
+                        </option>
+
+                        <option value="Freelance">
+                            💻 Freelance
+                        </option>
+
+                        <option value="Other">
+                            📦 Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="note">
+                        Note
+                    </label>
+
+                    <textarea
+                        id="note"
+                        placeholder="Optional note...">
+                    </textarea>
+
+                </div>
+
+
+                <div class="form-buttons">
+
+                    <button
+                        type="submit"
+                        class="submit-btn"
+                        id="submitBtn">
+
+                        + Add Transaction
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="cancel-btn"
+                        id="cancelBtn">
+
+                        Cancel
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <!-- ================= TRANSACTIONS ================= -->
+
+        <section class="transactions-card">
+
+            <div class="transactions-header">
+
+                <div>
+
+                    <span>ACTIVITY</span>
+
+                    <h2>
+                        Transaction History
+                    </h2>
+
+                </div>
+
+                <div class="transaction-count">
+                    <span id="transactionCount">
+                        0
+                    </span>
+                    transactions
+                </div>
+
+            </div>
+
+
+            <!-- SEARCH + FILTER -->
+
+            <div class="filters">
+
+                <div class="search">
+
+                    🔍
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search transactions...">
+
+                </div>
+
+
+                <select id="filterCategory">
+
+                    <option value="all">
+                        All Categories
+                    </option>
+
+                    <option value="Food">
+                        Food
+                    </option>
+
+                    <option value="Shopping">
+                        Shopping
+                    </option>
+
+                    <option value="Transport">
+                        Transport
+                    </option>
+
+                    <option value="Bills">
+                        Bills
+                    </option>
+
+                    <option value="Entertainment">
+                        Entertainment
+                    </option>
+
+                    <option value="Health">
+                        Health
+                    </option>
+
+                    <option value="Education">
+                        Education
+                    </option>
+
+                    <option value="Salary">
+                        Salary
+                    </option>
+
+                    <option value="Freelance">
+                        Freelance
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+
+                <select id="filterType">
+
+                    <option value="all">
+                        All Types
+                    </option>
+
+                    <option value="income">
+                        Income
+                    </option>
+
+                    <option value="expense">
+                        Expenses
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- TRANSACTION LIST -->
+
+            <div id="transactionList">
+
+                <!-- JavaScript inserts transactions here -->
+
+            </div>
+
+
+            <!-- EMPTY STATE -->
+
+            <div
+                id="emptyState"
+                class="empty-state">
+
+                <div>
+                    📊
+                </div>
+
+                <h3>
+                    No transactions yet
+                </h3>
+
+                <p>
+                    Add your first transaction to start
+                    tracking your finances.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= CATEGORY SUMMARY ================= -->
+
+    <section class="category-section">
+
+        <div class="section-heading">
+
+            <span>INSIGHTS</span>
+
+            <h2>
+                Spending by Category
+            </h2>
+
+        </div>
+
+
+        <div
+            id="categorySummary"
+            class="category-summary">
+
+            <!-- JavaScript generates categories -->
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+            Expense Tracker • Your finances, simplified.
+        </p>
+
+    </footer>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
